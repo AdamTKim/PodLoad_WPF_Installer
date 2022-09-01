@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	
+	<!--******************** METADATA ********************-->
+	<Product Id="*"
+			 Name="PodLoad"
+			 Language="1033"
+			 Version="1.0.2.0"
+			 Manufacturer="USAF // JT4 LLC"
+			 UpgradeCode="29a05ef7-d42e-4642-8991-aca44de6d4d1">
+
+		<Package InstallerVersion="200"
+				 Compressed="yes"
+				 InstallScope="perMachine" />
+
+		<Icon Id="Icon.ico" SourceFile="C:\Users\Admin\source\repos\PodLoad_WPF\P5_Icon.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="Icon.ico" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of the Pod Operational Tool is already installed." />
+
+		<MediaTemplate EmbedCab="yes"/>
+
+		<Feature Id="ProductFeature"
+				 Title="PodLoad_Installer"
+				 Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentGroupRef Id="Runtimes_UNIX" />
+			<ComponentGroupRef Id="Runtimes_WIN" />
+			<ComponentGroupRef Id="Runtimes_WIN_ARM64" />
+			<ComponentGroupRef Id="Runtimes_WIN_X64" />
+			<ComponentGroupRef Id="Runtimes_WIN_X86" />
+			<ComponentGroupRef Id="Shortcut_DESKTOP" />
+		</Feature>
+	</Product>
+
+	<!--******************** DIRECTORY STRUCTURE ********************-->
+	<Fragment>
+		<Directory Id="TARGETDIR" 
+				   Name="SourceDir">
+			<Directory Id="DesktopFolder"
+					   Name="Desktop">
+			</Directory>
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER"
+						   Name="PodLoad">
+					
+					<!-- SUBFOLDERS FOR RUNTIMES -->
+					<Directory Id="RUNTIMESUBFOLDER"
+							   Name="runtimes">		
+						<Directory Id="RUNTIMES_UNIX"
+								   Name="unix">
+							<Directory Id="RUNTIMES_UNIX_LIB"
+									   Name="lib">
+								<Directory Id="RUNTIMES_UNIX_NETCORE"
+										   Name="netcoreapp2.1">
+								</Directory>
+							</Directory>
+						</Directory>
+						<Directory Id="RUNTIMES_WIN"
+								   Name="win">
+							<Directory Id="RUNTIMES_WIN_LIB"
+									   Name="lib">
+								<Directory Id="RUNTIMES_WIN_NETCORE"
+										   Name="netcoreapp2.1">
+								</Directory>
+							</Directory>
+						</Directory>
+						<Directory Id="RUNTIMES_WIN_ARM64"
+								   Name="win-arm64">
+							<Directory Id="RUNTIMES_WIN_ARM64_NATIVE"
+									   Name="native">
+							</Directory>
+						</Directory>
+						<Directory Id="RUNTIMES_WIN_X64"
+								   Name="win-x64">
+							<Directory Id="RUNTIMES_WIN_X64_NATIVE"
+									   Name="native">
+							</Directory>
+						</Directory>
+						<Directory Id="RUNTIMES_WIN_X86"
+								   Name="win-x86">
+							<Directory Id="RUNTIMES_WIN_X86_NATIVE"
+									   Name="native">
+							</Directory>
+						</Directory>				
+					</Directory>
+				</Directory>
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<!--******************** COMPONENTS ********************-->
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" 
+						Directory="INSTALLFOLDER">
+			
+			<Component Id="CMP_SystemTextJson_dll"
+					   Guid="82F4028E-2652-458E-968F-98ACB577E6AC">
+				<File Id="FILE_SystemTextJson_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\System.Text.Json.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_SystemDataSqlClient_dll"
+					   Guid="FB636F48-EEC8-4B50-8786-3A606453F5BB">
+				<File Id="FILE_SystemDataSqlClient_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\System.Data.SqlClient.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_SerilogSinksFile_dll"
+					   Guid="5F50B391-4CB9-4779-9F98-EF546C559CF1">
+				<File Id="FILE_SerilogSinksFile_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\Serilog.Sinks.File.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_Serilog_dll"
+					   Guid="D155930B-EFE5-428A-A20B-F8C185CB7126">
+				<File Id="FILE_Serilog_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\Serilog.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPFRuntimeconfig_json"
+					   Guid="947692E3-D810-467A-A37E-F9D102EEE06D">
+				<File Id="FILE_PodLoadWPFRuntimeconfig_json"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.runtimeconfig.json"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPFRuntimeconfigDev_json"
+					   Guid="35B46C72-560E-44C1-BCAE-44234AD936A9">
+				<File Id="FILE_PodLoadWPFRuntimeconfigDev_json"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.runtimeconfig.dev.json"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPF_pdb"
+					   Guid="B2E5880E-7394-4442-814B-EF1E1BCCE879">
+				<File Id="FILE_PodLoadWPF_pdb"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.pdb"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPF_exe"
+					   Guid="70C42BCA-6FFB-4204-B75B-F7039CB023F2">
+				<File Id="FILE_PodLoadWPF_exe"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.exe"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPFdll_config"
+					   Guid="AF490FCF-64D9-45D8-B619-364705C12542">
+				<File Id="FILE_PodLoadWPFdll_config"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.dll.config"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPF_dll"
+					   Guid="A9AB9510-60AA-4CEE-8D8D-A2F18A66BB16">
+				<File Id="FILE_PodLoadWPF_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_PodLoadWPFdeps_json"
+					   Guid="708E7286-40A8-433F-A9DB-CA3A3342646F">
+				<File Id="FILE_PodLoadWPFdeps_json"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\PodLoad_WPF.deps.json"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_MicrosoftXamlBehaviors_dll"
+					   Guid="4D791926-1834-4E1E-8D3A-EAFBDEE5E1FD">
+				<File Id="FILE_MicrosoftXamlBehaviors_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\Microsoft.Xaml.Behaviors.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_MaterialDesignThemesWPF_dll"
+					   Guid="19C0DE57-BC93-4A2F-98DE-86AAAA53E656">
+				<File Id="FILE_MaterialDesignThemesWPF_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\MaterialDesignThemes.Wpf.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_MaterialDesignThemesMahApps_dll"
+					   Guid="D26B129E-82F7-47D6-9DEF-6B9D65CFB1FC">
+				<File Id="FILE_MaterialDesignThemesMahApps_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\MaterialDesignThemes.MahApps.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_MaterialDesignColors_dll"
+					   Guid="9B08B8CD-ACEF-4DDE-A717-C074CAC04A5F">
+				<File Id="FILE_MaterialDesignColors_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\MaterialDesignColors.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_MahAppsMetro_dll"
+					   Guid="E67143E1-A595-403A-AACB-A1A48DB6CA82">
+				<File Id="FILE_MahAppsMetro_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\MahApps.Metro.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_ControlzEx_dll"
+					   Guid="F2CA306C-77AB-4589-B720-1579EC4C0593">
+				<File Id="FILE_ControlzEx_dll"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\ControlzEx.dll"
+					  KeyPath="yes" />
+			</Component>
+
+			<Component Id="CMP_ContactHtml_html"
+					   Guid="555054FE-1683-49A6-A733-7DADD503FEDB">
+				<File Id="FILE_ContactHtml_html"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\ContactHTML.html"
+					  KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+	
+	<!-- SUBCOMPONENTS -->
+	<Fragment>
+		<ComponentGroup Id="Runtimes_UNIX"
+						Directory="RUNTIMES_UNIX_NETCORE">
+			
+			<Component Id="SUBCMP_SystemDataSqlClient_dll_UNIX"
+					   Guid="E79F497E-5C28-4CC2-880F-4BC63D9F66D3">
+				<File Id="SUBFILE_SystemDataSqlClient_dll_UNIX"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll"
+					  KeyPath="yes" />
+				<CreateFolder/>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="Runtimes_WIN"
+						Directory="RUNTIMES_WIN_NETCORE">
+
+			<Component Id="SUBCMP_SystemDataSqlClient_dll_WIN"
+					   Guid="CD0B5BB0-D8DE-4649-B78B-124F544C9C14">
+				<File Id="SUBFILE_SystemDataSqlClient_dll_WIN"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll"
+					  KeyPath="yes" />
+				<CreateFolder/>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="Runtimes_WIN_ARM64"
+						Directory="RUNTIMES_WIN_ARM64_NATIVE">
+
+			<Component Id="SUBCMP_Sni_dll_ARM64"
+					   Guid="FBD3BDD7-34AE-486A-9B31-15D80EE69300">
+				<File Id="SUBFILE_Sni_dll_ARM64"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\runtimes\win-arm64\native\sni.dll"
+					  KeyPath="yes" />
+				<CreateFolder/>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="Runtimes_WIN_X64"
+						Directory="RUNTIMES_WIN_X64_NATIVE">
+
+			<Component Id="SUBCMP_Sni_dll_X64"
+					   Guid="5C977A35-4B03-4CBD-B303-1BC30385047B">
+				<File Id="SUBFILE_Sni_dll_X64"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\runtimes\win-x64\native\sni.dll"
+					  KeyPath="yes" />
+				<CreateFolder/>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="Runtimes_WIN_X86"
+						Directory="RUNTIMES_WIN_X86_NATIVE">
+
+			<Component Id="SUBCMP_Sni_dll_X86"
+					   Guid="ABE1E07C-70AA-4486-ACDF-3E477D7290A7">
+				<File Id="SUBFILE_Sni_dll_X86"
+					  Source="C:\Users\Admin\source\repos\PodLoad_WPF\bin\Release\netcoreapp3.1\runtimes\win-x86\native\sni.dll"
+					  KeyPath="yes" />
+				<CreateFolder/>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+
+	<!-- SHORTCUTS -->
+	<Fragment>
+		<ComponentGroup Id="Shortcut_DESKTOP"
+						Directory="DesktopFolder">
+
+			<Component Id="SUBCMP_DesktopShortcut"
+					   Guid="2E122C09-3684-4BDD-AB94-F7A1C2F9376D">
+				<Shortcut Id="SHORT_ApplicationDesktopShortcut"
+						  Name="Pod Operational Tool"
+						  Description="Tool to assist the Pod Shop in loading/unloading pods and to maintain long term analytics"
+						  Target="[INSTALLFOLDER]PodLoad_WPF.exe"
+						  WorkingDirectory="INSTALLFOLDER">
+				</Shortcut>
+				<RegistryValue Root="HKCU"
+							   Key="Software/PodLoad"
+							   Name="Installed"
+							   Type="integer"
+							   Value="1"
+							   KeyPath="yes">
+				</RegistryValue>
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

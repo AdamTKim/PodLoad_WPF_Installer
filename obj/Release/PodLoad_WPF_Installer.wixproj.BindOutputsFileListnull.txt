@@ -1,0 +1,2 @@
+C:\Users\Admin\source\repos\PodLoad_WPF_Installer\bin\Release\PodLoad_WPF_Installer.msi
+C:\Users\Admin\source\repos\PodLoad_WPF_Installer\bin\Release\PodLoad_WPF_Installer.wixpdb

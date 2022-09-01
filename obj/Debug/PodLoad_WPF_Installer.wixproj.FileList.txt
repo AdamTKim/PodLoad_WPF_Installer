@@ -1,0 +1,6 @@
+C:\Users\Admin\source\repos\PodLoad_WPF_Installer\bin\Debug\PodLoad_WPF_Installer.msi
+C:\Users\Admin\source\repos\PodLoad_WPF_Installer\bin\Debug\PodLoad_WPF_Installer.wixpdb
+obj\Debug\Product.wixobj
+obj\Debug\PodLoad_WPF_Installer.wixproj.BindContentsFileListnull.txt
+obj\Debug\PodLoad_WPF_Installer.wixproj.BindOutputsFileListnull.txt
+obj\Debug\PodLoad_WPF_Installer.wixproj.BindBuiltOutputsFileListnull.txt
